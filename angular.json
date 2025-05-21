@@ -32,8 +32,11 @@
               }
             ],
             "styles": [
+              "src/assets/primeng/theme.css",
+              "src/assets/primeng/primeng.min.css",
+              "src/assets/primeicons/primeicons.css",
               "src/styles.scss"
-            ],
+            ],            
             "scripts": []
           },
           "configurations": {
@@ -91,8 +94,11 @@
               }
             ],
             "styles": [
+              "src/assets/primeng/theme.css",
+              "src/assets/primeng/primeng.min.css",
+              "src/assets/primeicons/primeicons.css",
               "src/styles.scss"
-            ],
+            ],            
             "scripts": []
           }
         }

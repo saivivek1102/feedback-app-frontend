@@ -1,0 +1,89 @@
+<p-toast></p-toast>
+
+<div class="form-wrapper">
+  <p-steps
+    [model]="[
+      { label: 'Personal Info' },
+      { label: 'Feedback' },
+      { label: 'Summary' }
+    ]"
+    [(activeIndex)]="activeIndex"
+    styleClass="steps-custom mb-4"
+  ></p-steps>
+
+  <!-- Step 1: Personal Info -->
+  <div *ngIf="activeIndex === 0" class="step-section">
+    <h3>Step 1: Personal Info</h3>
+
+    <div class="p-field mb-3">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        pInputText
+        [(ngModel)]="name"
+        class="p-inputtext-sm"
+        placeholder="Enter your name"
+      />
+      <small *ngIf="showStep1Errors && !name.trim()" class="p-error">Name is required.</small>
+    </div>
+
+    <div class="p-field mb-3">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        pInputText
+        [(ngModel)]="email"
+        class="p-inputtext-sm"
+        placeholder="Enter your email"
+      />
+      <small *ngIf="showStep1Errors && !isValidEmail(email)" class="p-error">Enter a valid email.</small>
+    </div>
+
+    <button pButton label="Next" (click)="nextStep()" class="p-button-sm p-button-primary"></button>
+  </div>
+
+  <!-- Step 2: Feedback -->
+  <div *ngIf="activeIndex === 1" class="step-section">
+    <h3>Step 2: Feedback</h3>
+
+    <div class="p-field mb-3">
+      <label for="feedback">Your Feedback</label>
+      <textarea
+        id="feedback"
+        pInputTextarea
+        [(ngModel)]="feedback"
+        rows="4"
+        class="p-inputtextarea-sm"
+        placeholder="Share your thoughts..."
+      ></textarea>
+      <small *ngIf="showStep2Errors && !feedback.trim()" class="p-error">Feedback is required.</small>
+    </div>
+
+    <div class="p-field mb-3">
+      <label>Rating</label>
+      <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
+      <small *ngIf="showStep2Errors && rating < 1" class="p-error">Rating must be at least 1 star.</small>
+    </div>
+
+    <div class="p-d-flex p-jc-between p-flex-wrap gap-2 mt-3">
+      <button pButton label="Back" (click)="prevStep()" class="p-button-sm p-button-secondary"></button>
+      <button pButton label="Next" (click)="nextStep()" class="p-button-sm p-button-primary"></button>
+    </div>
+  </div>
+
+  <!-- Step 3: Summary -->
+  <div *ngIf="activeIndex === 2" class="step-section">
+    <h3>Step 3: Summary</h3>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Email:</strong> {{ email }}</p>
+    <p><strong>Feedback:</strong> {{ feedback }}</p>
+    <p><strong>Rating:</strong> {{ rating }} star(s)</p>
+
+    <div class="p-d-flex p-jc-between p-flex-wrap gap-2 mt-3">
+      <button pButton label="Back" (click)="prevStep()" class="p-button-sm p-button-secondary"></button>
+      <button pButton label="Submit" (click)="submitForm()" class="p-button-sm p-button-success"></button>
+    </div>
+  </div>
+</div>
